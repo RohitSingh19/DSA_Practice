@@ -6,8 +6,227 @@ using System.Threading.Tasks;
 
 namespace DS.Others
 {
+    public class Role
+    { 
+        public int Id { get; set; } 
+        public string Name { get; set; }
+    }
+
     public class Others
     {
+
+
+
+        public List<Role> getRoles()
+        { 
+            var availableRoles = new List<Role>() { new Role() { Id = 1, Name = "Role A" },
+            new Role() { Id = 2, Name = "Role B" },
+            new Role() { Id = 3, Name = "Role C" },
+            new Role() { Id = 4, Name = "Role D" },
+            new Role() { Id = 5, Name = "Role E" }};
+
+
+            var userRole = new List<Role>() {
+            new Role() { Id = 2, Name = "Role B" },
+            new Role() { Id = 4, Name = "Role D" }};
+
+            var allowedRoles = availableRoles.Where(av => userRole.Any(x => x.Name == av.Name)).ToList();
+            return allowedRoles;
+        }
+
+        public string ReorganizeString(string s)
+        {
+            var dict = new Dictionary<char, int>();
+            var q = new PriorityQueue<Pair, int>(Comparer<int>.Create((x, y) => y.CompareTo(x)));
+            foreach (var c in s)
+            {
+                if (dict.ContainsKey(c))
+                    dict[c]++;
+                else
+                    dict[c] = 1;
+            }
+
+            foreach (var item in dict)
+            {
+                q.Enqueue(new Pair(item.Key, item.Value), item.Value);
+            }
+
+            char[] result = new char[s.Length];
+            
+            var sb = new StringBuilder();
+            while(q.Count > 1)
+            {
+                Pair first = q.Dequeue();
+                Pair second = q.Dequeue();
+                sb.Append(first.key);
+                sb.Append(second.key);
+                first.val--;
+                second.val--;
+                if(first.val > 0)
+                    q.Enqueue(first, first.val);
+                
+                if(second.val > 0)
+                    q.Enqueue(second, second.val);
+            }
+
+            var str = sb.ToString();
+            return new string(result);
+        }
+
+        public class Pair
+        { 
+            public int val;
+            public char key;
+
+            public Pair(char key, int val)
+            {
+                this.val = val;
+                this.key = key;
+            }
+        }
+
+        public int LongestContinuousSubstring(string s)
+        {
+
+
+            int curr = (s[0] - 'a') + 1;
+            int maxLen = 0;
+            for (int i = 1; i < s.Length; i++)
+            {
+                int currLen = 1;
+                while (i < s.Length && ((s[i] - 'a') + 1) - curr == 1)
+                {
+                    currLen++;
+                    curr = (s[i] - 'a') + 1;
+                    i++;
+                }
+                i--;
+                maxLen = Math.Max(currLen, maxLen);
+            }
+            return maxLen;
+        }
+
+
+        public int GetDecimals(string exp)
+        {
+            int result = 0;
+            if (!string.IsNullOrEmpty(exp))
+            { 
+                var arr = exp.Split('|');
+                if(arr.Length > 2 && int.TryParse(arr[2], out result)) {
+                    return result;
+                }
+            }
+            return result;
+        }
+
+        public int MinimumOperations(int[] nums)
+        {
+            if (nums.Length == 1) return 0;
+            var minHeap = new PriorityQueue<int, int>();
+
+            foreach (var num in nums)
+            {
+                if (num > 0)
+                    minHeap.Enqueue(num, num);
+            }
+
+            int ans = 0;
+
+            while (minHeap.Count > 0)
+            {
+
+                int num = minHeap.Dequeue();
+
+                if (ReduceArrayBy(nums, num))
+                    return ans;
+
+                ans++;
+
+            }
+            return ans;
+        }
+
+        private bool ReduceArrayBy(int[] arr, int by)
+        {
+            int idx = 0;
+            int sum = 0;
+            bool done = true;
+            while (idx < arr.Length)
+            {
+
+                if (arr[idx] > 0)
+                {
+                    arr[idx] = (arr[idx] - by);
+                    done = false;
+                }
+                idx++;
+            }
+            return done;
+        }
+
+        public int LeastInterval(char[] tasks, int n)
+        {
+            var map = new Dictionary<char, int>();
+            bool[] res = new bool[tasks.Length * n + 100];
+            createMap(tasks, map);
+
+            int idx = 0;
+            int ans = int.MinValue;
+            foreach (var pair in map)
+            {
+                int val = pair.Value;
+                int i = idx;
+                while (val > 0)
+                {
+                    res[i] = true;
+                    ans = Math.Max(i, ans);
+                    val--;
+                    i += (n + 1);
+                }
+                idx++;
+            }
+            return ans;
+        }
+
+        private void createMap(char[] tasks, Dictionary<char, int> map)
+        {
+            foreach (var task in tasks)
+            {
+                if (map.ContainsKey(task))
+                    map[task]++;
+                else
+                    map[task] = 1;
+            }
+
+            map.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+        }
+
+        public IList<IList<int>> Combine(int n, int k)
+        {
+            var result = new List<List<int>>();
+            var list = new List<int>();
+            int start = 1;
+            for (int i = start; i <= n; i++)
+            {
+                list.Add(i);
+
+                if (list.Count == k)
+                {
+                    result.Add(new List<int>(list));
+                    list.RemoveAt(list.Count - 1);
+                    if (i == n)
+                    {
+                        i = start++;
+                        list = new List<int>();
+                    }
+                    if (start == i)
+                        break;
+                }
+
+            }
+            return result.ToArray();
+        }
         public int findPages(int[] A,int M)
         {
             

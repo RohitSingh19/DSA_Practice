@@ -1,4 +1,5 @@
 ﻿using DS.BinarySearch;
+using DS.DP;
 using DS.Greedy;
 using DS.Heap;
 using DS.LinkedList;
@@ -9,200 +10,807 @@ using DS.Recursion;
 using DS.Tree;
 using Microsoft.VisualBasic;
 using System;
+using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using QuickSort = DS.LinkedList.QuickSort;
 
 class Program
 {
-
-    public static void Main(string[] args)
+    public static bool BackspaceCompare(string s, string t)
     {
-        //LinkedListProgram linkedListProgram = new LinkedListProgram();
-        //linkedListProgram.CallMainForLinkedList();
-        //Others others = new Others();
-        //var ans = others.NthRoot(3, 27);
-        //Console.WriteLine(ans);
+        Console.WriteLine(helper(s));
+        Console.WriteLine(helper(t));
 
-        //int[] ar1 = { 1, 2, 3, 6 };
-        //int[] ar2 = { 4, 6, 8, 10 };
-        //int[] ar1 = { 1, 12, 15, 36, 38 };
-        //int[] ar2 = { 2, 13, 17, 30, 45 };
-        //int n1 = ar1.Length;
-        //int n2 = ar2.Length;
-        //Console.WriteLine("Median is " +
-        //               findMedian(ar1, ar2, 0, 0,
-        //                         ar1.Length - 1,
-        //                         ar2.Length - 1));
-
-        //PrintBackward print = new PrintBackward();
-        //print.print(5);
-        //Recursion recursion = new Recursion();
-        //recursion.CalculateFactorial(4);
-        //Sum sum = new Sum();
-        //sum.calculate();
-
-        //SearchRotated  searchRotated = new SearchRotated();
-        //searchRotated.Test();
-
-        //CountAndSay count = new CountAndSay();
-        //count.RunCountAndSay();
-
-        //string str = "abc";
-        //var result = program.SubSetRecursive(str);
-        //var result = program.permute(arr);
-
-        ////heapTest.StartHeapTest();
-        //heapTest.FindKthLargest();
-
-
-        //QuickSort qc = new QuickSort();
-        //int[] arr = new int[] {1,8,3,9,4,5,7};
-        //qc.quickSort(arr, 0, arr.Length - 1);
-        //Console.WriteLine(arr);
-
-        //int[] arr1 = new int[] { 3, 4, 5, 1, 2 };
-        //int[] arr2 = new int[] { 2, 1, 3, 4};
-
-        //Others o = new Others();
-        //var ans1 = o.Check(arr1);
-        //var ans2 = o.Check(arr1);
-
-        //var result1 = o.CheckString("aaabbb");
-        //var result2 = o.CheckString("abab");
-
-
-        //var ans = o.AreNumbersAscending("1 b 3 b 4 r 6 g 12 l");
-
-
-        //int[] arr = { 4,10,3,5,1 };
-        //int N = arr.Length;
-
-        //// Function call
-        //HeapSort ob = new HeapSort();
-        //ob.sort(arr);
-
-        //Console.WriteLine("Sorted array is");
-        //ob.printArray(arr);
-
-        //LinkedListProgram listProgram = new LinkedListProgram();
-        //listProgram.CallMainForLinkedList();
-
-        //DoublyLinkedList doubly = new DoublyLinkedList();
-        //doubly.MainDoubly();
-        //QuickSort quickSort = new DS.LinkedList.QuickSort();
-        //quickSort.MainLLQuick();
-
-        //FlattenList list = new FlattenList();
-        //list.FlattenMain();
-
-
-        //RecursionProgram recursionProgram = new RecursionProgram();
-        //recursionProgram.RecursionProgramMain();
-        //Program program = new Program();
-        //string[] input = new string[] { "a","b", "c"};
-        //int result = program.MinDeletionSize(input);
-        //int result = program.fib(6);
-        //int result = 13 % 3;
-        //Console.Write(result);
-
-        //Program program = new Program();
-        //int[] arr = new int[] { 1, 2, 3 };
-        ////var result = program.SubSetRecursive(arr);
-        //var result = program.permute(arr);
-
-        //Queen q = new Queen();
-        //var ans = q.SolveNQueens(4);
-
-        //PallindromePartioning pallindromePartioning = new PallindromePartioning();
-        //var ans = pallindromePartioning.Partition("aabb");
-
-        //Rat ratInAMaze = new Rat();
-        //ratInAMaze.RatInAMazeMainFunc();
-
-        //NonDecreasingSeq seq = new NonDecreasingSeq();
-        //int[] nums = new int[] { 4, 4, 3, 2, 1 };
-        //var res = seq.FindSubsequences(nums);
-
-        //BinaryTree binaryTree = new BinaryTree();
-        //binaryTree.BTMain();
-        //string str = "aabbccc";
-        //var result = Compress(str.ToCharArray());
-
-        //int[][] jagged_arr = new int[3][];
-        //jagged_arr[0] = new int[] { 1, 2, 3 };
-        //jagged_arr[1] = new int[] { 4, 5, 6 };
-        //jagged_arr[2] = new int[] { 7, 8, 9 };
-        //var result = new Others().DiagonalSum(jagged_arr);
-        //var result = new Others().ReverseWords("  hello world  ");
-        //var arr = new int[] { 1, 5, 0, 4, 1, 3 };
-        //var result = new Others().CanPlaceFlowers(arr, 2);
-        //var result = new Others().IncreasingTriplet(arr);
-        //var result = new Others().IsSubsequence("abc", "ahbgdc");
-        //var result = new Others().FindMaxAverage(arr, 4);
-        //var start = new int[] { 0,3,1,5,8,5};
-        //var end = new int[] { 6,4,2,7,9,9};
-        //var res = new MeetingRoom().maxMeetings(start, end, 6);
-        //Console.WriteLine(res);
-        //MyHashSet myHashSet = new MyHashSet();
-        //myHashSet.Add(1);
-        //myHashSet.Add(2);
-        //var r1 = myHashSet.Contains(1);
-        //var r2 = myHashSet.Contains(3);
-        //myHashSet.Add(2);
-        //var r3 = myHashSet.Contains(2);
-        //myHashSet.Remove(2);
-        //var r4 = myHashSet.Contains(2);
-        ////Others o = new Others();
-        //// var start = new int[] { 1, 79, 80, 1, 1, 1, 200, 1 };
-        ////var res = o.MaxScore(start, 3);
-        ////var ans = o.characterReplacement("AABABBA", 1);
-
-        var arr = new int[4][] { new int[] { 1,2,3,4 },
-                                 new int[] { 5, 0 ,7, 8},
-                                 new int[] { 0, 11, 11, 12 },
-                                 new int[] { 13,14,15,0} };
-        ////var arr = new int[2][] { new int[] { 4,3},
-        ////                         new int[] { 3,2}
-        ////};
-        ////var uttar  = o.CountNegatives(arr);
-        //var arr1 = new int[] { 1,2,3,4,5};
-        //var arr2 = new int[] { 1,2,3};
-        //var uttar = o.rowWithMax1s(arr, 4, 4);
-        //o.SetZeroes(arr);
-        //var res = o.Generate(5);
-        //var u = o.RemoveDigit("1231", '1');
-        //MergeSort mergeSort = new MergeSort();
-
-        //mergeSort.Run();
-
-        //Program p = new Program();
-        //var a = new string[4] { "a","abcf","aa","a"};
-
-        //var result = p.LongestCommonPrefix(a);
-        
-        Others o2 = new Others();
-        var arr1 = new int[3] { 15, 17, 2 };
-        o2.findPages(arr1, 2);
+        return (s == t);
     }
 
-    public string LongestCommonPrefix(string[] strs)
+
+    private static string helper(string str)
     {
-        string str = strs[0];
-        if (strs.Length == 1) return str;
+        StringBuilder sb = new();
+        int len = str.Length - 1;
+        while (len >= 0)
+        {
+
+            int backSpace = 0;
+            int idx = len;
+            while (idx >= 0 && str[idx] == '#')
+            {
+                backSpace++;
+                idx--;
+            }
+
+            len = idx;
+            while (backSpace > 0 && len > 0)
+            {
+                backSpace--;
+                len--;
+            }
+            sb.Insert(0, str[len] + "");
+
+            
+            len--;
+        }
+        sb.Length--;
+        return sb.ToString();
+    }
+
+    public static int TotalMoney(int n)
+    {
+        
+
+        int q = n / 7;
+        int rem = n % 7;
+        int start = 1;
+        int sum = 28;
+        if (q == 0)
+        {
+            sum = 0;
+        }
+        int prevSum = sum;
+        while (q > 0)
+        {
+            sum = prevSum + 7;
+            prevSum = sum;
+            q--;
+            start++;
+        }
+        Console.WriteLine(sum);
+        while (rem > 0)
+        {
+            sum += start++;
+            rem--;
+        }
+
+        return sum;
+    }
+
+    public static IList<IList<int>> Generate(int numRows)
+    {
+        var result = new List<List<int>>();
+        result.Add(new List<int>() { 1});
+        int pointer = 1;
+        while (pointer <= numRows)
+        {
+
+            List<int> prev = result[pointer - 1];
+            int prevCount = prev.Count;
+            Console.WriteLine(prev.Count);
+            int start = 1;
+            var list = new List<int>();
+            while (start <= prevCount)
+            {
+                Console.WriteLine(start);
+
+                if (start == 1 || start == prevCount)
+                {
+                    list.Add(1);
+                } 
+                else
+                {
+                    int curr = prev[start - 1] + prev[start - 2];
+                    list.Add(curr);
+                    start++;
+                }
+                
+            }
+            result.Add(list);
+            pointer++;
+        }
+        return result.ToArray();
+    }
+
+    public int solution(int[] A, int[] B)
+    {
+        int n = A.Length;
+        int m = B.Length;
+
+        int[] prefixSumA = new int[n + 1];
+        int[] prefixSumB = new int[m + 1];
+
+        for (int i = 1; i <= n; i++)
+            prefixSumA[i] = prefixSumA[i - 1] + A[i - 1];
+
+        for (int i = 1; i <= m; i++)
+            prefixSumB[i] = prefixSumB[i - 1] + B[i - 1];
+
+        int count = 0;
+        for (int k = 0; k < n; k++)
+        {
+            if (prefixSumA[k] == prefixSumA[n] - prefixSumA[k] &&
+                prefixSumB[k] == prefixSumB[m] - prefixSumB[k])
+            {
+                count++;
+            }
+        }
+
+        return 0;
+    }
+
+    private void PCL()
+    {
+        int[] A = new int[] { 0, 4, -1, 0, 3 };
+        int[] B = new int[] { 0, -2, 5, 0, 3 };
+
+        //int[] A = new int[] { 2,-2,-3,3};
+        //int[] B = new int[] { 0,0,4,-4 };
+
+        int ans = fairIndex(A, B);
+    }
+
+    public static int fairIndex(int []a, int []b)
+    {
+        int sumA = 0;
+        int sumB = 0;
+
+        for (int i = 0; i < a.Length; i++)
+        {
+            sumA += a[i];
+            sumB += b[i];
+        }
+        int count = 0;
+        int tempA = a[0];
+        int tempB = b[0];
+
+        for (int i = 1; i < a.Length; i++)
+        {
+            if (i != 1 && tempA == tempB && 2 * tempA == sumA && 2 * tempB == sumB)
+            {
+                count++;
+            }
+            tempA += a[i];
+            tempB += b[i];
+        }
+        return count;
+    }
+    public int solution(int N, string S)
+    {
+
+        string[] reservedSeats = S.Split(' ');
+        Dictionary<int, HashSet<int>> seats = new Dictionary<int, HashSet<int>>();
+
+        foreach (string seat in reservedSeats)
+        {
+            int row = int.Parse(seat.Substring(0, seat.Length - 1));
+            int col = seat[seat.Length - 1] - 'A';
+
+            if (col >= 1 && col <= 4)
+                seats[row] = new HashSet<int>(0);
+            else if (col >= 5 && col <= 8)
+                seats[row] = new HashSet<int>(1);
+            else if (col >= 9 && col <= 10)
+                seats[row] = new HashSet<int>(2);
+        }
+
+        int res = 2 * N;
+
+        foreach (int row in seats.Keys)
+        {
+            if (seats[row].IsSubsetOf(new HashSet<int> { 1, 2, 3, 4 }) && seats[row].IsSubsetOf(new HashSet<int> { 5, 6, 7, 8 }))
+                continue;
+            else if (seats[row].IsSubsetOf(new HashSet<int> { 1, 2, 3 }) && seats[row].IsSubsetOf(new HashSet<int> { 7, 8, 9 }))
+                res -= 1;
+            else
+                res -= 2;
+        }
+
+        return res;
+    }
+
+    public int FindLeastNumOfUniqueInts(int[] arr, int k)
+    {
+        var map = new Dictionary<int, int>();
+
+        foreach (var num in arr)
+        {
+            if (map.ContainsKey(num))
+            {
+                map[num]++;
+            }
+            else
+            {
+                map[num] = 1;
+            }
+        }
+        map = map.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+
+        foreach (var pair in map)
+        {
+
+            while (map[pair.Key] > 0 && k > 0)
+            {
+                map[pair.Key]--;
+                k--;
+            }
+            if (map[pair.Key] == 0)
+                map.Remove(pair.Key);
+
+
+        }
+
+        return map.Count;
+    }
+
+    public long minTime(int[] arr, int n, int k)
+    {
+
+        int lo = arr.Max();
+        int hi = arr.Sum();
+        int result = -1;
+        while (lo <= hi)
+        {
+            int mid = lo + (hi - lo) / 2;
+            if (CanPaint(arr, mid, k))
+            {
+                result = mid;
+                hi = mid - 1;
+            }
+            else
+            {
+                lo = mid + 1;
+            }
+        }
+        return result;
+    }
+    private bool CanPaint(int[] arr, int walls, int limit)
+    {
+        int count = 1;
+        int wallsPainted = arr[0];
+
+        for (int i = 1; i < arr.Length; i++)
+        {
+            wallsPainted += arr[i];
+
+            if (wallsPainted > limit)
+            {
+                count++;
+                wallsPainted = arr[i];
+            }
+        }
+
+        return count <= limit;
+
+    }
+
+    public int median(List<List<int>> matrix, int R, int C)
+    {
+        int lo = int.MaxValue;
+        int hi = int.MinValue;
+
+        for (int i = 0; i < matrix.Count; i++)
+        {
+            for (int j = 0; j < matrix[i].Count; j++)
+            {
+                lo = Math.Min(matrix[i][j], lo);
+                hi = Math.Max(matrix[i][j], hi);
+            }
+        }
+
+        int requiredNum = (R * C) / 2;
+        while (lo <= hi)
+        {
+            int mid = (lo + hi) / 2;
+            int smallCount = countSmallEqual(matrix, R, mid);
+
+            if (smallCount <= requiredNum)
+                lo = mid + 1;
+            else
+                hi = mid - 1;
+        }
+
+        return lo;
+    }
+
+    private int countSmallEqual(List<List<int>> matrix, int R, int x)
+    {
+        int smallerCount = 0;
+
+        for (int r = 0; r < R; r++)
+        {
+            smallerCount += UpperBound(matrix[r], x);
+        }
+        return smallerCount;
+    }
+
+    private int UpperBound(List<int> arr, int x)
+    {
+        int lo = 0;
+        int hi = arr.Count - 1;
+        int ans = hi;
+
+        while (lo <= hi)
+        {
+            int mid = (lo + hi) / 2;
+            if (mid > x)
+            {
+                ans = mid;
+                hi = mid - 1;
+            }
+            else
+            {
+                lo = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+    public int TriangularSum(int[] nums)
+    {
+        List<int> list;
+        List<int> prev = new List<int>(nums);
+        while (prev.Count > 1)
+        {
+            list = new List<int>();
+            for (int idx = 0; idx < prev.Count - 1; idx++)
+            {
+                int sum = (prev[idx] + prev[idx + 1]);
+                list.Add(sum > 9 ? sum % 10 : sum);
+            }
+            prev = list;
+        }
+
+        return prev[0];
+    }
+
+
+    public string RemoveOuterParentheses(string s)
+    {
         var sb = new StringBuilder();
-        var result = new StringBuilder();
+        int openCount = 0; 
+        foreach(var ch in s)
+        {
+            if (ch == '(')
+            {
+                if (openCount > 0)
+                {
+                    sb.Append(ch);
+                }
+
+                openCount++;
+            }
+            else 
+            { 
+                if(openCount > 1) { 
+                    sb.Append(ch); 
+                }
+                openCount--;
+            }
+        }
+
+        return sb.ToString();
+    }
+    public static void Main(string[] args)
+    {
+        //BinaryTree binaryTree = new BinaryTree();
+        //binaryTree.BTMain();
+        //Program program = new Program();
+        //var arr = new string[] {"dadaabaa", "bdaaabcc" };
+        //var result = program.CommonChars(arr);
+
+        //Subset subset = new Subset();
+        //int[] arr = new int[] { 1,2,3};
+        //var s = subset.Subsets(arr);
+
+        RecursionProgram program = new RecursionProgram();
+        char[][] arr = new char[3][];
+        arr[0] = new char[4] { 'Z', 'B', 'C', 'E' };
+        arr[1] = new char[4] { 'S', 'F', 'C', 'S' };
+        arr[2] = new char[4] { 'A', 'D', 'E', 'E' };
+        
+        var result = program.Exist(arr, "ABCCED");
+        //var result = program.GenerateBinaryStrings(2);
+
+    }
+
+    public IList<string> CommonChars(string[] words)
+    {
+        var result = new List<string>();
+        var dict = new Dictionary<char, int>();
+        foreach (var character in words[0])
+        {
+            if (dict.ContainsKey(character))
+            {
+                dict[character]++;
+            }
+            else
+            {
+                dict[character] = 1;
+            }
+        }
+        
+        foreach (var pair in dict)
+        {
+            int min = pair.Value;
+            for (int idx = 1; idx < words.Length; idx++)
+            {
+                int count = countOfCharInWord(words[idx], pair.Key);
+
+                if (count == 0)
+                    break;
+                min = Math.Min(min, count);
+                if (idx == words.Length - 1)
+                {
+                    int val = min;
+                    while (val > 0)
+                    {
+                        result.Add(pair.Key + "");
+                        val--;
+                    }
+                }
+            }
+        }
+        return result.ToArray();
+        /*
+            b = 1
+            e = 1
+            l = 2
+            a = 1
+        */
+    }
+
+    private int countOfCharInWord(string word, char ch)
+    {
+        int count = 0;
+        foreach (var character in word)
+        {
+            if (character == ch) count++;
+        }
+
+        return count;
+    }
+
+    public string MinWindow(string s, string t)
+    {
+        int[] map = new int[128];
+        foreach (var ch in t)
+            map[ch]++;
+
+        int startIndex = -1;
+        int minLen = int.MaxValue;
+        int count = 0;
+        for (int right = 0, left = 0; right < s.Length; right++)
+        {
+            //if the character is already present in the map array, which means it can be part of target
+            if (map[s[right]] > 0)
+            {
+                count++;
+                map[s[right]]--; // character taken
+            }
+            while (count == t.Length)
+            {
+                if (right - left + 1 < minLen)
+                {
+                    minLen = right - left + 1;
+                    startIndex = left;
+                }
+                map[s[left]]--;
+                left++;
+                if (map[s[left]] > 0)
+                    count--;
+
+            }
+        }
+        return startIndex == -1 ? string.Empty : s.Substring(startIndex, minLen);
+    }
+    public int AtMostK(int[] A, int K)
+    {
+        int left = 0, res = 0, distinctCount = 0;
+        Dictionary<int, int> count = new Dictionary<int, int>();
+        for (int right = 0; right < A.Length; right++)
+        {
+
+            if (!count.ContainsKey(A[right]))
+            {
+                count[A[right]] = 1;
+                distinctCount++;
+                while (distinctCount > K)
+                {
+                    count[A[left]]--;
+                    if (count[A[left]] == 0)
+                    {
+                        count.Remove(A[left]);
+                        distinctCount--;
+                    }
+                    left++;
+                }
+            }
+            else
+            {
+                count[A[right]]++;
+            }
+
+            res += right - left + 1;
+        }
+        return res;
+    }
+    public int NumSubarraysWithSum(int[] nums, int goal)
+    {
+        if (goal < 0) return 0;
+        int res = 0, i = 0, n = nums.Length;
+        
+        for(int j = 0; j < n; j++)
+        {
+            goal -= nums[j];
+            while(goal < 0)
+            {
+                goal += nums[i++];
+            }
+            res += j - i + 1;
+        }
+
+        return res;
+
+    }
+    public class Pair
+    {
+        public int index;
+        public int count;
+
+        public Pair(int index, int count)
+        {
+            this.index = index;
+            this.count = count;
+        }
+
+    }
+    public string CustomSortString(string order, string s)
+    {
+        Dictionary<char, Pair> dict = new();
+        StringBuilder resultSb = new StringBuilder();
+        StringBuilder extraSb = new StringBuilder();
+
+        for (int idx = 0; idx < s.Length; idx++)
+        {
+            if (!dict.ContainsKey(s[idx]))
+            {
+                int index = order.IndexOf(s[idx]);
+                if (index == -1)
+                {
+                    extraSb.Append(s[idx]);
+                }
+                else
+                {
+                    dict[s[idx]] = new Pair(index, 1);
+                }
+            }
+            else 
+            {
+                dict[s[idx]].count++;
+            }
+        }
+
+        dict = dict.OrderBy(x => x.Value.index).ToDictionary(x=> x.Key, x => x.Value);
+
+        foreach(var item in dict)
+        {
+            int val = item.Value.count;
+            while(val > 0)
+            {
+                resultSb.Append(item.Key);
+                val--;
+            }
+        }
+
+
+
+        //char[] arr = new char[order.Length];
+
+
+        //foreach (var ch in s)
+        //{
+        //    if (dict.ContainsKey(ch))
+        //    {
+        //        var index = dict[ch];
+        //        arr[index] = ch;
+        //    }
+        //    else
+        //    {
+        //        extraSb.Append(ch);
+        //    }
+        //}
+        //var resultSb = new StringBuilder();
+        //foreach (var ch in arr)
+        //{
+        //    if (char.IsLetter(ch))
+        //        resultSb.Append(ch.ToString());
+        //}
+        resultSb.Append(extraSb.ToString());
+        return resultSb.ToString();
+        
+    }
+    public int MyAtoi(string a)
+    {
+        StringBuilder result = new StringBuilder();
+        /*removing any trailing spaces*/
+        string s = a.Trim();
+
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (char.IsLetter(s[i]) || s[i] == '.') return 0;
+            if (char.IsDigit(s[i]))
+            {
+                if (i > 1) return 0;
+                if (i == 1) return MyFunc(i - 1, s);
+                return MyFunc(i, s);
+            }
+        }
+        return 0;
+    }
+
+    private int MyFunc(int index, string s)
+    {
+        StringBuilder res = new StringBuilder();
+        if (s[index] == '-')
+        {
+            res.Append('-');
+            index++;
+        }
+        else if (s[index] == '+') index++;
+
+        for (int i = index; i < s.Length; i++)
+        {
+            if (!char.IsDigit(s[i]))
+            {
+                return CheckNumber(res.ToString());
+            }
+            res.Append(s[i]);
+        }
+        return CheckNumber(res.ToString());
+    }
+
+    private int CheckNumber(string numberString)
+    {
+        if (int.TryParse(numberString, out int number))
+        {
+            if (number > int.MaxValue)
+            {
+                return int.MaxValue;
+            }
+            else if (number < int.MinValue)
+            {
+                return int.MinValue;
+            }
+            else
+            {
+                return number;
+            }
+        }
+        return (numberString[0] == '-') ? int.MinValue : int.MaxValue;
+    }
+
+    public int MaxFreq(string s, int maxLetters, int minSize, int maxSize)
+    {
+        if (s == null || s.Length == 0 || maxLetters == 0) return 0;
+
+        var dict = new Dictionary<string, int>();
+        int max = 0;
+        for (int i = 0; i < s.Length - minSize + 1; i++)
+        {
+            string sub = s.Substring(i, i + minSize);
+            if (isValid(sub, maxLetters))
+            {
+                if (dict.ContainsKey(sub))
+                    dict[sub]++;
+                else
+                    dict[sub] = 1;
+
+                max = Math.Max(dict[sub], max);
+            }
+        }
+        return max;
+    }
+
+    private bool isValid(string str, int maxLetters)
+    {
+        var hashSet = new HashSet<char>();
         foreach (var ch in str)
         {
-            sb.Append(ch.ToString());
-            string s = sb.ToString();
+            hashSet.Add(ch);
+        }
+        return hashSet.Count <= maxLetters;
+    }
+    public long WonderfulSubstrings(string word)
+    {
+        int[] map;
+        long result = 0;
+
+        for (int idx = 0; idx < word.Length; idx++)
+        {
+            map = new int[10];
+            Array.Fill(map, -1);
+            for (int jdx = idx; jdx < word.Length; jdx++)
+            {
+                if (map[word[jdx] - 'a'] == -1)
+                    map[word[jdx] - 'a'] = 1;
+                else
+                    map[word[jdx] - 'a']++;
+
+                result += CountOdds(map) ? 1 : 0;
+            }
+        }
+        return result;
+    }
+    private bool CountOdds(int[] map)
+    {
+        for (int idx = 0; idx < 10; idx++)
+        {
+            if (map[idx] == 0 || map[idx] == 1) return true;
+        }
+        return false;
+    }
+    public string LongestPalindrome(string s)
+    {
+        string res = string.Empty;
+        int prev = 0;
+        for (int i = 0; i < s.Length; i++)
+        {
+            for (int j = i; j < s.Length; j++)
+            {
+                bool flag = isPallindrome(s, i, j);
+                if (flag && (j - i + 1) > prev)
+                {
+                    prev = (j - i + 1);
+                    res = s.Substring(i, j);
+                }
+            }
+        }
+        return res;
+    }
+
+    private bool isPallindrome(string s, int l, int r)
+    {
+        while (l <= r && s[l] == s[r])
+        {
+            l++;
+            r--;
+
+            if (l > r) return true;
+        }
+
+        return false;
+    }
+    public string LongestCommonPrefix(string[] strs)
+    {
+        if (strs.Length == 1) return strs[0];
+        var sb = new StringBuilder();
+        string str = strs[0];
+        int idx = 0;
+        while (idx < str.Length)
+        {
+            string S = idx == 0 ? str[idx].ToString() : sb.ToString();
+
             for (int i = 1; i < strs.Length; i++)
             {
-                if (!strs[i].StartsWith(s))
-                    return result.ToString();
+                if (!strs[i].StartsWith(S))
+                {
+                    return sb.ToString();
+                }
             }
-            result.Append(ch.ToString());
+            sb.Append(str[idx]);
+            idx++;
         }
-        return "";
+        return sb.Length > 0 ? sb.ToString() : "";
     }
     public static int Compress(char[] chars)
     {

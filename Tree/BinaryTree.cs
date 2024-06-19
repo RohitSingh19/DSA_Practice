@@ -8,17 +8,18 @@ using System.Threading.Tasks;
 
 namespace DS.Tree
 {
-
+   
     public class BinaryTree
     {
         public int totalCount = 0;
         public int previousLevel = -1;
+        
         public List<List<int>> result = new List<List<int>>();
 
         List<int> arr1 = new List<int>();
         List<int> arr2 = new List<int>();
         public int counter = 0;
-
+        public int ans = 0;
         public Node root;
         public class Node
         {
@@ -29,16 +30,17 @@ namespace DS.Tree
                 data = d;
             }
         }
+       
 
         public void BTMain()
         {
             BinaryTree binaryTree = new BinaryTree();
-            binaryTree.root = new Node(3);
-            binaryTree.root.left = new Node(1);
-            binaryTree.root.right = new Node(-4);
-            binaryTree.root.left.left = new Node(3);
-            binaryTree.root.right.left = new Node(1);
-            binaryTree.root.right.right = new Node(5);
+            binaryTree.root = new Node(5);
+            binaryTree.root.left = new Node(3);
+            binaryTree.root.right = new Node(6);
+            binaryTree.root.left.left = new Node(2);
+            binaryTree.root.left.right = new Node(4);
+            binaryTree.root.left.left.left = new Node(1);
             //binaryTree.root.left.right.left = new Node(7);
             //binaryTree.root.left.right.right = new Node(4);
             //binaryTree.root.right.left = new Node(0);
@@ -70,13 +72,36 @@ namespace DS.Tree
             //string abc = binaryTree.serialize(binaryTree.root);
             //Node node = binaryTree.deserialize(abc);
 
-            var ans = GoodNodes(binaryTree.root);
+            //var ans = GoodNodes(binaryTree.root);
+
+            var uttar = KthSmallest(binaryTree.root, 3);
         }
 
         public int GoodNodes(Node root)
         {
             CountGoodNodes(root, root.data);
             return totalCount;
+        }
+
+        public int KthSmallest(Node root, int k)
+        {
+            counter = k;
+            helper(root, counter);
+            return ans;
+        }
+
+        private void helper(Node root, int counter)
+        {
+            if (root.left != null) helper(root.left,counter);
+
+            counter--;
+
+            if (counter == 0)
+            {
+                ans = root.data;
+                return;
+            }
+            if (root.right != null) helper(root.right, counter);
         }
 
         private void CountGoodNodes(Node node, int prevCount)
@@ -269,77 +294,25 @@ namespace DS.Tree
             RootToNodeAllPath(node.left, result, recurList);
             RootToNodeAllPath(node.right, result, recurList);
         }
-        public Node LowestCommonAncestor(Node root, int p, int q)
+        public Node LowestCommonAncestor(Node root, Node p, Node q)
         {
 
-            helperP(root, p);
-            helperQ(root, q);
-
-            //foreach (var i in arr1)
-            //{
-            //    Console.Write(" " + 2);
-            //}
-            //Console.WriteLine();
-            //foreach (var i in arr2)
-            //{
-            //    Console.Write(" " + i);
-            //}
-
-            int pIndex = 0;
-            int qIndex = 0;
-
-            int lastMatch = 0;
-            int count = 0;
-            while (pIndex < arr1.Count && qIndex < arr2.Count)
+            //base case 
+            if (root == null || p == root || q == root)
             {
-                if (arr1[pIndex++] == arr2[qIndex++])
-                {
-                    count++;
-                }
-                else
-                {
-                    break;
-                }
+                return root;
             }
 
-            Console.Write(count + 1);
 
-            return new Node(lastMatch);
-        }
+            Node Left = LowestCommonAncestor(root.left, p, q);
+            Node Right = LowestCommonAncestor(root.right, p, q);
 
-        public bool helperP(Node node, int data)
-        {
-            if (node == null)
-                return false;
-
-            arr1.Add(node.data);
-
-            if (node.data == data)
-                return true;
-
-            if (helperP(node.left, data) || helperP(node.right, data))
-                return true;
-
-            arr1.RemoveAt(arr1.Count - 1);
-
-            return false;
-        }
-        public bool helperQ(Node node, int data)
-        {
-            if (node == null)
-                return false;
-
-            arr2.Add(node.data);
-
-            if (node.data == data)
-                return true;
-
-            if (helperQ(node.left, data) || helperQ(node.right, data))
-                return true;
-
-            arr2.RemoveAt(arr2.Count - 1);
-
-            return false;
+            if (Left == null)
+                return Right;
+            else if (Right == null)
+                return Left;
+            else
+                return root;
         }
 
         //private List<int> VerticalTraversal(Node root)

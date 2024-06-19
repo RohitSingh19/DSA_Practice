@@ -21,24 +21,41 @@ namespace DS.LinkedList
             }
         }
 
+        private void convertArrayToList()
+        {
+            int[] arr = new int[] { 1, 2, 3, 4, 5 };
+            Node head = new Node(-1);
+            Node temp = head;
+            int idx = 0;
+            while(idx < arr.Length)
+            {
+                temp.next = new Node(arr[idx]);
+                temp = temp.next;
+                idx++;
+            }
+        }
+
         public void CallMainForLinkedList()
         {
             LinkedListProgram linkedList = new LinkedListProgram();
-            linkedList.head = new Node(1);
+            linkedList.convertArrayToList();
+            //linkedList.head = new Node(1);
             //linkedList.head.next = new Node(2);
-            //linkedList.head.next.next = new Node(4);
-            //linkedList.head.next.next.next = new Node(3);
-            //linkedList.head.next.next.next.next = new Node(4);
-            //linkedList.head.next.next.next.next.next = new Node(8);
+            //linkedList.head.next.next = new Node(3);
+            //linkedList.head.next.next.next = new Node(4);
+            //linkedList.head.next.next.next.next = new Node(5);
+            //linkedList.head.next.next.next.next.next = new Node(6);
             //linkedList.head.next.next.next.next.next.next = new Node(7);
-            //linkedList.head.next.next.next.next.next.next.next = new Node(6);
+            //linkedList.head.next.next.next.next.next.next.next = new Node(8);
+            //linkedList.head.next.next.next.next.next.next.next.next = new Node(9);
+            //linkedList.head.next.next.next.next.next.next.next.next.next = new Node(10);
+
+            var ans = linkedList.SplitListToParts(linkedList.head, 5);
 
 
-
-
-            LinkedListProgram linkedList1 = new LinkedListProgram();
-            linkedList1.head1 = new Node(9);
-            linkedList1.head1.next = new Node(9);
+            //LinkedListProgram linkedList1 = new LinkedListProgram();
+            //linkedList1.head1 = new Node(9);
+            //linkedList1.head1.next = new Node(9);
             //linkedList1.head1.next.next = new Node(4);
             //linkedList1.head1.next.next.next = new Node(9);
             //linkedList1.head1.next.next.next.next = new Node(7);
@@ -80,6 +97,120 @@ namespace DS.LinkedList
             //Node result = AddTwoNumbers(linkedList.head, linkedList1.head1);
         }
 
+        public Node[] SplitListToParts(Node head, int k)
+        {
+            int len = getLength(head);
+            int group = len / k;
+            int extras = len % k;
+
+            Node [] result = new Node[k];
+            Node node = head;
+            Node prev = null;
+            int idx = 0;
+            while (node != null)
+            {
+                result[idx] = node;
+                int curr = group;
+                while (curr + extras > 0)
+                {
+                    prev = node;
+                    node = node.next;
+                    if (curr == 0)
+                        break;
+                    if (extras > 0)
+                        extras--;
+                    else
+                        curr--;
+                }
+                idx++;
+                prev.next = null;
+            }
+
+            return result.ToArray();
+        }
+
+        private int getLength(Node node)
+        {
+            int len = 0;
+            while (node != null)
+            {
+                node = node.next;
+                len++;
+            }
+            return len;
+        }
+        public Node ReverseListRecursion(Node head)
+        {
+            if (head == null || head.next == null) return head;
+            Node node = ReverseListRecursion(head.next);
+
+            head.next.next = head;
+            head.next = null;
+            return node;
+        }
+
+        public Node OddEvenList(Node head)
+        {
+            if (head == null || head.next == null)
+                return head;
+
+            Node odd = head; //odd
+            Node even = odd.next; //even
+            Node EvenHead = odd.next;
+
+            while (odd.next != null && even.next != null)
+            {
+                odd.next = odd.next.next;
+                odd = odd.next;
+                even.next = even.next.next;
+                even = even.next;
+            }
+            odd.next = EvenHead;
+            return head;
+        }
+        public int PairSum(Node head)
+        {
+
+            Node slow = head;
+            Node fast = head;
+            Node first = new Node(0);
+            Node temp = first;
+
+            while (slow != null && fast != null && fast.next != null)
+            {
+                temp.next = new Node(slow.data);
+                temp = temp.next;
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+
+            first = first.next;
+            Node second = ReverseList(slow);
+            int maxSum = 0;
+            while (second != null && first != null)
+            {
+                maxSum = Math.Max(first.data + second.data, maxSum);
+                first = first.next;
+                second = second.next;
+            }
+
+            return maxSum;
+        }
+
+        public Node ReverseList(Node head)
+        {
+            Node prev = null;
+            Node curr = head;
+
+            while (curr != null)
+            {
+                Node next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+            }
+            return prev;
+        }
         public Node AddTwoNumbers(Node l1, Node l2)
         {
             l1 = Reverse(l1);
